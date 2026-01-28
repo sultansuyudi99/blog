@@ -21,6 +21,7 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to micropost_url(Micropost.last)
+    puts assigns(:micropost).errors.full_messages
   end
 
   test "should show micropost" do
