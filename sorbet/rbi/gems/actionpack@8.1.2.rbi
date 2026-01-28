@@ -9140,6 +9140,9 @@ class ActionController::TestCase < ::ActiveSupport::TestCase
   # source://actionpack//lib/action_controller/test_case.rb#600
   def _run_setup_callbacks(&block); end
 
+  # source://actionpack//lib/action_controller/test_case.rb#601
+  def before_setup; end
+
   class << self
     # source://actionpack//lib/action_controller/test_case.rb#599
     def _controller_class; end
@@ -13619,9 +13622,21 @@ class ActionDispatch::IntegrationTest < ::ActiveSupport::TestCase
   include ::ActionDispatch::Routing::UrlFor
   include ::ActionDispatch::IntegrationTest::UrlOptions
   include ::ActionDispatch::Assertions::RoutingAssertions::WithIntegrationRouting
-  include ::Turbo::TestAssertions::IntegrationTestAssertions
   extend ::ActionDispatch::IntegrationTest::Behavior::ClassMethods
   extend ::ActionDispatch::Assertions::RoutingAssertions::WithIntegrationRouting::ClassMethods
+
+  # source://actionpack//lib/action_dispatch/testing/integration.rb#670
+  def before_setup; end
+
+  class << self
+    private
+
+    # source://actionpack//lib/action_dispatch/testing/integration.rb#670
+    def __class_attr_fixture_paths; end
+
+    # source://actionpack//lib/action_dispatch/testing/integration.rb#670
+    def __class_attr_fixture_paths=(new_value); end
+  end
 end
 
 # source://actionpack//lib/action_dispatch/testing/integration.rb#659
@@ -13639,10 +13654,6 @@ module ActionDispatch::IntegrationTest::Behavior
   include ::ActionDispatch::Routing::UrlFor
   include ::ActionDispatch::IntegrationTest::UrlOptions
   include ::ActionDispatch::Assertions::RoutingAssertions::WithIntegrationRouting
-  include ::Turbo::TestAssertions::IntegrationTestAssertions
-
-  mixes_in_class_methods ::ActionDispatch::IntegrationTest::Behavior::ClassMethods
-  mixes_in_class_methods ::ActionDispatch::Assertions::RoutingAssertions::WithIntegrationRouting::ClassMethods
 
   # source://actionpack//lib/action_dispatch/testing/integration.rb#692
   def app; end
