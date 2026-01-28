@@ -1,8 +1,14 @@
 <% content_for :title, "Home" %>
 
-<div>
-  <h1 class="font-bold text-4xl">Sample App</h1>
-  <p>This is the home page</p>
+<div class="text-center w-full space-y-4 mx-auto max-w-lg">
+  <%= image_tag "rails.svg", alt: "Rails logo", width: "500", class: "mx-auto" %>
+  <h2 class="text-lg">
+    This is the home page for the
+    <a href="https://www.railstutorial.org/">Ruby on Rails Tutorial</a>
+    sample application.
+  </h2>
 
-  <p>For help go to <%= link_to %> </p>
+  <%= link_to "Sign up now!", signup_path, class: "inline-flex h-10 items-center bg-blue-200 font-medium transition-colors shadow-sm rounded-md px-6 py-1 hover:bg-blue-200/80" %>
+
+  <p class="text-neutral-500">For help go to <%= link_to "Help", help_path, class: "underline text-blue-300" %> </p>
 </div>

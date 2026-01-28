@@ -4,13 +4,15 @@
 
 <h1 class="text-3xl font-bold">Users</h1>
 
-<div id="users">
+<div id="users" class="space-y-2">
   <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-    <%= link_to "Show this user", user %>
-    </p>
+    <div>
+      <%= render user %>
+      <p>
+      <%= link_to "Show this user", user, class: "text-blue-300 underline" %>
+      </p>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New user", new_user_path, class: "rounded-md inline-flex h-8 px-4 bg-green-200" %>
+<%= link_to "New user", new_user_path, class: "rounded-md font-medium items-center inline-flex h-8 px-4 bg-green-200" %>

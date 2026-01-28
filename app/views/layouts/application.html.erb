@@ -24,8 +24,10 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-6 space-y-4">
+    <%= render "layouts/header" %>
+    <main class="w-full max-w-3xl min-h-[80vh] mx-auto mt-40 px-6 space-y-4">
       <%= yield %>
     </main>
+    <%= render "layouts/footer" %>
   </body>
 </html>

@@ -57,6 +57,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "tapioca", require: false
 end
 
 group :test do
@@ -64,6 +65,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "minitest-reporters"
+  gem "rails-controller-testing"
 end
 
 gem "tailwindcss-rails", "~> 4.4"

@@ -1,6 +1,8 @@
 require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
+  base_title = " | Ruby on Rails Blog"
+
   setup do
     @user = users(:one)
   end
@@ -10,9 +12,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_user_url
+  test "should get signup" do
+    get signup_url
     assert_response :success
+    assert_select "title", "Sign up" + base_title
   end
 
   test "should create user" do
