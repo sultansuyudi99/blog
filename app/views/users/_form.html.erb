@@ -13,13 +13,23 @@
 
   <div class="my-5">
     <%= form.label :name, class: "block font-medium mb-1" %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:border-blue-500 focus:ring-blue-500" %>
+    <%= form.text_field :name, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
   </div>
 
   <div class="my-5">
     <%= form.label :email, class: "block font-medium mb-1" %>
-    <%= form.text_field :email, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full focus:border-blue-500 focus:ring-blue-500" %>
+    <%= form.text_field :email, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
   </div>
 
-    <%= form.submit "Sign up", class: "rounded-lg w-full py-3 px-5 bg-indigo-400 text-white inline-block font-medium cursor-pointer hover:bg-blue-700 transition duration-200" %>
+  <div class="my-5">
+    <%= form.label :password, class: "block font-medium mb-1" %>
+    <%= form.password_field :password, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :password_confirmation, class: "block font-medium mb-1" %>
+    <%= form.password_field :password_confirmation, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
+  </div>
+
+  <%= form.submit "Sign up", class: "bg-blue-500 rounded-lg text-white w-full py-3 px-5 inline-block font-medium cursor-pointer transition duration-200" %>
 <% end %>

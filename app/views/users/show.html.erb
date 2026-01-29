@@ -1,4 +1,11 @@
+<% provide(:title, @user.name) %>
 <p style="color: green"><%= notice %></p>
+
+
+<h2>
+  Current time:
+  <%= Time.now %>
+</h2>
 
 <%= render @user %>
 
@@ -9,7 +16,7 @@
   <h2 class="font-bold mt-4">Posts</h2>
   <% @user.microposts.each do |micropost| %>
     <div class="text-sm">
-    <%= micropost.context %>
+      <%= micropost.context %>
     </div>
   <% end %>
 

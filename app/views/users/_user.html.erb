@@ -1,10 +1,23 @@
 <div id="<%= dom_id user %>" class="p-4 rounded-md shadow-sm border border-neutral-200 space-y-1">
-  <div class="text-xl font-medium">
-    <%= user.name %>
+  <div class="flex items-center gap-2">
+    <%= gravatar_for user %>
+    <div>
+      <h1 class="text-xl font-medium ">
+        <%= user.name %>
+      </h1>
+      <h2 class="text-neutral-500">
+        <%= user.email %>
+      </h2>
+    </div>
+  </div>
+
+
+  <div class="text-neutral-500 mt-4">
+    Created at: <%= user.created_at %>
   </div>
 
   <div class="text-neutral-500">
-    <%= user.email %>
+    Last updated at: <%= user.updated_at %>
   </div>
 
 </div>

@@ -25,9 +25,18 @@
 
   <body>
     <%= render "layouts/header" %>
-    <main class="w-full max-w-3xl min-h-[80vh] mx-auto mt-40 px-6 space-y-4">
+    <main class="w-full max-w-3xl mx-auto mt-40 px-6 space-y-4">
+      <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "rounded-sm bg-green-200 p-2") %>
+      <% end %>
       <%= yield %>
     </main>
     <%= render "layouts/footer" %>
+    <% if Rails.env.development? %>
+      <div class="clear-both float-left w-full box-border bg-[#eaeaea] p-4">
+        <h2 class="font-bold">Debug Output</h2>
+        <%= debug(params) %>
+      </div>
+    <% end %>
   </body>
 </html>
