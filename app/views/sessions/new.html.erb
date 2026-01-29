@@ -11,6 +11,11 @@
       <%= form.password_field :password, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
     </div>
 
+    <%= form.label :remember_me do %>
+      <%= form.check_box :remember_me %>
+      <span>Remember me on this computer</span>
+    <% end %>
+
     <%= form.submit "Login", class: "bg-blue-500 rounded-lg text-white w-full py-3 px-5 mt-12 inline-block font-medium cursor-pointer transition duration-200" %>
   <% end %>
   <p class="text-neutral-500 text-center">Don't have an accout? <%= link_to "Register now", signup_path, class: "underline hover:text-blue-500 transition-colors" %></p>
