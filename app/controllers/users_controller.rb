@@ -83,6 +83,7 @@ class UsersController < ApplicationController
 
     def correct_user
       @user = User.find(params[:id])
+      flash[:danger] = "You are unauthorized to do this."
       redirect_to(root_url) unless current_user?(@user)
     end
 end
