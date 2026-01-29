@@ -5,16 +5,8 @@
 # typed: false
 
 module ::CI; end
-module ActionMailbox::InboundEmail::GeneratedAssociationMethods; end
-module ActionText::RichText::GeneratedAssociationMethods; end
-module ActiveStorage::Attachment::GeneratedAssociationMethods; end
 module Bundler::FetchMetadata; end
 module Bundler::MatchMetadata; end
 module Set::SubclassCompatible; end
 module Set::SubclassCompatible::ClassMethods; end
-module SolidQueue::BlockedExecution::GeneratedAssociationMethods; end
-module SolidQueue::ClaimedExecution::GeneratedAssociationMethods; end
 module SolidQueue::Execution::GeneratedAssociationMethods; end
-module SolidQueue::Job::GeneratedAssociationMethods; end
-module SolidQueue::Process::GeneratedAssociationMethods; end
-module SolidQueue::RecurringTask::GeneratedAssociationMethods; end

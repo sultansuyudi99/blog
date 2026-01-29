@@ -27,8 +27,8 @@ class Rails::Conductor::BaseController
     include ::ActionController::Base::HelperMethods
     include ::ApplicationHelper
     include ::MicropostsHelper
+    include ::SessionsHelper
     include ::StaticPagesHelper
-    include ::UserHelper
     include ::UsersHelper
   end
 

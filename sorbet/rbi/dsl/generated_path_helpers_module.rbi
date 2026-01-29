@@ -22,6 +22,9 @@ module GeneratedPathHelpersModule
   def help_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def login_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def micropost_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

@@ -1,6 +1,4 @@
 <% provide(:title, @user.name) %>
-<p style="color: green"><%= notice %></p>
-
 
 <h2>
   Current time:
@@ -13,12 +11,15 @@
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path, class: "mb-5" %>
 
-  <h2 class="font-bold mt-4">Posts</h2>
-  <% @user.microposts.each do |micropost| %>
-    <div class="text-sm">
-      <%= micropost.context %>
-    </div>
+  <h2 class="nt-bold mt-4">Posts (<%= @user.microposts.length %>)</h2>
+  <% if @user.microposts.any? %>
+    <% @user.microposts.each do |micropost| %>
+      <div class="text-sm">
+        <%= micropost.context %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-neutral-500">No posts found.</p>
   <% end %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
 </div>

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get "help" => "static_pages#help"
   get "about" => "static_pages#about"
   get "signup" => "users#new"
+  get "login" => "sessions#new"
+  post "login" => "sessions#create"
+  post "logout" => "sessions#destroy"
   resources :microposts
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

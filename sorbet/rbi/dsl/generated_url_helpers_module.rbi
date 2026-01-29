@@ -22,6 +22,9 @@ module GeneratedUrlHelpersModule
   def help_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def login_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def micropost_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

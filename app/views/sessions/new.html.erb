@@ -1,0 +1,17 @@
+<div class="flex flex-col gap-6 w-full max-w-md mx-auto items-center">
+  <h1 class="font-bold text-center text-4xl">Login</h1>
+  <%= form_with(scope: :session, url: login_path, local: true, class: "w-full space-y-6") do |form| %>
+    <div>
+      <%= form.label :email, class: "block font-medium mb-1" %>
+      <%= form.email_field :email, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :password, class: "block font-medium mb-1" %>
+      <%= form.password_field :password, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
+    </div>
+
+    <%= form.submit "Login", class: "bg-blue-500 rounded-lg text-white w-full py-3 px-5 mt-12 inline-block font-medium cursor-pointer transition duration-200" %>
+  <% end %>
+  <p class="text-neutral-500 text-center">Don't have an accout? <%= link_to "Register now", signup_path, class: "underline hover:text-blue-500 transition-colors" %></p>
+</div>

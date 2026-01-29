@@ -449,6 +449,7 @@ DEPENDENCIES
   solid_cable
   solid_cache
   solid_queue
+  sorbet-runtime
   sqlite3 (>= 2.1)
   stimulus-rails
   tailwindcss-rails (~> 4.4)

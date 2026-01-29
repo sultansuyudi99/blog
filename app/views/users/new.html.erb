@@ -4,8 +4,4 @@
 
 <%= render "form", user: @user %>
 
-<br>
-
-<div>
-  <%= link_to "Back to users", users_path %>
-</div>
+<p class="text-neutral-500 text-center">Already have an accout? <%= link_to "Login", signup_path, class: "underline hover:text-blue-500 transition-colors" %></p>

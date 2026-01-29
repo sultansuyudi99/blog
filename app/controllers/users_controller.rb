@@ -20,12 +20,14 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # POST /users or /users.json
+  # POST /signup, /users, or /users.json
   def create
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
+        reset_session
+        log_in @user
         format.html { redirect_to @user, notice: "Successfully registered, welcome to the Blog App!" }
         format.json { render :show, status: :created, location: @user }
       else
