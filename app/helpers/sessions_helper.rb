@@ -31,17 +31,22 @@ module SessionsHelper
       user = User.find_by(id: user_id)
       if user && session[:session_token] == user.remember_digest
         @current_user = user
-      elsif (user_id = cookies.encrypted[:user_id])
-        user = User.find_by(id: user_id)
-        if user&.authenticated?(cookies[:remember_token])
-          log_in user
-          @current_user = user
-        end
+      end
+    elsif (user_id = cookies.encrypted[:user_id])
+      user = User.find_by(id: user_id)
+      if user&.authenticated?(cookies[:remember_token])
+        log_in user
+        @current_user = user
       end
     end
-
-    sig { returns(T::Boolean) }
-    def is_logged_in?
-      !current_user.nil?
-    end
   end
+
+  def current_user?(user)
+    user && user == current_user
+  end
+
+  sig { returns(T::Boolean) }
+  def is_logged_in?
+    !current_user.nil?
+  end
+end

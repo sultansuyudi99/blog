@@ -5,6 +5,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @user = users(:one)
+    @other_user = users(:two)
   end
 
   test "should get index" do
@@ -32,11 +33,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit" do
+    log_in_as(@user)
     get edit_user_url(@user)
     assert_response :success
   end
 
   test "should update user" do
+    log_in_as(@user)
     patch user_url(@user), params: { user: { email: @user.email, name: @user.name, password: "admin#1234", password_confirmation: "admin#1234" } }
     assert_redirected_to user_url(@user)
   end
@@ -47,5 +50,20 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to users_url
+  end
+
+  test "should redirect edit when logged in as wrong user" do
+    log_in_as(@other_user)
+    get edit_user_path(@user)
+    assert flash.empty?
+    assert_redirected_to root_url
+  end
+
+  test "should redirect update when logged in as wrong user" do
+    log_in_as(@other_user)
+    patch user_path(@user), params: { user: { name: @user.name,
+                                              email: @user.email } }
+    assert flash.empty?
+    assert_redirected_to root_url
   end
 end
