@@ -13,6 +13,9 @@ module GeneratedUrlHelpersModule
   def about_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_account_activation_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def edit_micropost_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

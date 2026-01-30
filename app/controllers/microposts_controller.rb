@@ -25,11 +25,11 @@ class MicropostsController < ApplicationController
 
     respond_to do |format|
       if @micropost.save
-        format.html { redirect_to @micropost, notice: "Micropost was successfully created." }
-        format.json { render :show, status: :created, location: @micropost }
+        format.html { redirect_to(@micropost, notice: "Micropost was successfully created.") }
+        format.json { render(:show, status: :created, location: @micropost) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @micropost.errors, status: :unprocessable_entity }
+        format.html { render(:new, status: :unprocessable_entity) }
+        format.json { render(json: @micropost.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -38,11 +38,11 @@ class MicropostsController < ApplicationController
   def update
     respond_to do |format|
       if @micropost.update(micropost_params)
-        format.html { redirect_to @micropost, notice: "Micropost was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @micropost }
+        format.html { redirect_to(@micropost, notice: "Micropost was successfully updated.", status: :see_other) }
+        format.json { render(:show, status: :ok, location: @micropost) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @micropost.errors, status: :unprocessable_entity }
+        format.html { render(:edit, status: :unprocessable_entity) }
+        format.json { render(json: @micropost.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -52,8 +52,8 @@ class MicropostsController < ApplicationController
     @micropost.destroy!
 
     respond_to do |format|
-      format.html { redirect_to microposts_path, notice: "Micropost was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
+      format.html { redirect_to(microposts_path, notice: "Micropost was successfully destroyed.", status: :see_other) }
+      format.json { head(:no_content) }
     end
   end
 

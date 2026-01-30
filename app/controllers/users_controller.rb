@@ -1,3 +1,5 @@
+# typed: true
+
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   before_action :logged_in_user, only: [ :index, :edit, :update, :destroy ]
@@ -28,13 +30,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        reset_session
-        log_in @user
-        format.html { redirect_to @user, notice: "Successfully registered, welcome to the Blog App!" }
-        format.json { render :show, status: :created, location: @user }
+        @user.send_activation_email
+        format.html { redirect_to(root_url, notice: "Please check your email to activate your account.") }
+        format.json { render(:show, status: :created, location: @user) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render(:new, status: :unprocessable_entity) }
+        format.json { render(json: @user.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -43,11 +44,11 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: "User was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @user }
+        format.html { redirect_to(@user, notice: "User was successfully updated.", status: :see_other) }
+        format.json { render(:show, status: :ok, location: @user) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render(:edit, status: :unprocessable_entity) }
+        format.json { render(json: @user.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -57,15 +58,15 @@ class UsersController < ApplicationController
     @user.destroy!
 
     respond_to do |format|
-      format.html { redirect_to users_path, notice: "User was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
+      format.html { redirect_to(users_path, notice: "User was successfully destroyed.", status: :see_other) }
+      format.json { head(:no_content) }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params.expect(:id))
+      @user = User.where(activated: true).find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
@@ -77,7 +78,7 @@ class UsersController < ApplicationController
       unless is_logged_in?
         store_location
         flash[:danger] = "Please log in."
-        redirect_to login_url
+        redirect_to(login_url)
       end
     end
 

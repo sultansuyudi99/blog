@@ -7,20 +7,25 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
     if @user&.authenticate(params[:session][:password])
-      forwarding_url = session[:forwarding_url]
-      reset_session
-      params[:session][:remember_me] == "1" ? remember(@user) : forget(@user)
-      log_in @user
-      redirect_to forwarding_url || @user, notice: "Successfully logged in!"
+      if @user.activated?
+        forwarding_url = session[:forwarding_url]
+        reset_session
+        params[:session][:remember_me] == "1" ? remember(@user) : forget(@user)
+        log_in(@user)
+        redirect_to(forwarding_url || @user, notice: "Successfully logged in!")
+      else
+        flash[:warning] = "Your account is not activated. Please check your email for the activation link."
+        redirect_to(root_url)
+      end
     else
       flash.now[:danger] = "Invalid credentials."
-      render "new", status: :unprocessable_entity
+      render("new", status: :unprocessable_entity)
     end
   end
 
   def destroy
     log_out if is_logged_in?
-    redirect_to root_path, notice: "Successfully logged out!"
+    redirect_to(root_path, notice: "Successfully logged out!")
   end
 
   private

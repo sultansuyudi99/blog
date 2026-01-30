@@ -6,3 +6,40 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable # Automatically opt-in to new rules
+  Exclude:
+    - 'db/schema.rb'
+    - 'bin/*'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - 'config/environments/*'
+
+# Relaxing the "Annoyances"
+Metrics/MethodLength:
+  Max: 15 # Default 10 is often too strict for Rails controllers
+  Exclude:
+    - 'db/migrate/*.rb'
+
+Metrics/AbcSize:
+  Max: 20
+
+Style/Documentation:
+  Enabled: false # Stops asking for comments at the top of every class
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes # Most Rails devs prefer " over '
+
+Style/FrozenStringLiteralComment:
+  Enabled: false # Useful for gems, annoying for standard Rails apps
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  
+Layout/LineLength:
+  Max: 120 # Default 80 is very 1990s

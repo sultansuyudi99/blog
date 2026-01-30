@@ -13,6 +13,9 @@ module GeneratedPathHelpersModule
   def about_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_account_activation_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def edit_micropost_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

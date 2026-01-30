@@ -35,7 +35,7 @@ module SessionsHelper
     elsif (user_id = cookies.encrypted[:user_id])
       user = User.find_by(id: user_id)
       if user&.authenticated?(cookies[:remember_token])
-        log_in user
+        log_in(user)
         @current_user = user
       end
     end
