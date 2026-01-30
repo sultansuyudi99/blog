@@ -8,9 +8,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @other_user = users(:two)
   end
 
-  test "should get index" do
-    get users_url
-    assert_response :success
+  test "should redirect index if when not logged in" do
+    get users_path
+    assert_redirected_to login_path
   end
 
   test "should get signup" do
@@ -45,6 +45,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy user" do
+    log_in_as(@user)
     assert_difference("User.count", -1) do
       delete user_url(@user)
     end
@@ -65,5 +66,32 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
                                               email: @user.email } }
     assert_not flash.empty?
     assert_redirected_to root_url
+  end
+
+  test "should not allow admin attribute to be edited" do
+    log_in_as(@other_user)
+    assert_not @other_user.admin?
+    patch user_path(@other_user), params: {
+      password: "admin#1234",
+      password_confirmation: "admin#1234",
+      admin: true
+    }
+
+    assert_not @other_user.reload.admin?
+  end
+
+  test "should redirect destroy when not logged in" do
+    assert_no_difference "User.count" do
+      delete user_url(@other_user)
+    end
+    assert_redirected_to(login_url)
+  end
+
+  test "should redirect destroy when logged in as non-admin" do
+    log_in_as(@other_user)
+    assert_no_difference "User.count" do
+      delete user_url(@user)
+    end
+    assert_redirected_to(root_url)
   end
 end

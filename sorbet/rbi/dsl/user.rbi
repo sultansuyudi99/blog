@@ -828,6 +828,51 @@ class User
     sig { void }
     def password_digest_will_change!; end
 
+    sig { returns(T.nilable(::String)) }
+    def remember_digest; end
+
+    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
+    def remember_digest=(value); end
+
+    sig { returns(T::Boolean) }
+    def remember_digest?; end
+
+    sig { returns(T.nilable(::String)) }
+    def remember_digest_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def remember_digest_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def remember_digest_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def remember_digest_change; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def remember_digest_change_to_be_saved; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def remember_digest_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def remember_digest_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def remember_digest_previous_change; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def remember_digest_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def remember_digest_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def remember_digest_was; end
+
+    sig { void }
+    def remember_digest_will_change!; end
+
     sig { void }
     def restore_created_at!; end
 
@@ -845,6 +890,9 @@ class User
 
     sig { void }
     def restore_password_digest!; end
+
+    sig { void }
+    def restore_remember_digest!; end
 
     sig { void }
     def restore_updated_at!; end
@@ -884,6 +932,12 @@ class User
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_password_digest?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def saved_change_to_remember_digest; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def saved_change_to_remember_digest?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
     def saved_change_to_updated_at; end
@@ -953,6 +1007,9 @@ class User
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_password_digest?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def will_save_change_to_remember_digest?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_updated_at?(from: T.unsafe(nil), to: T.unsafe(nil)); end

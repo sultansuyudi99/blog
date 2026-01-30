@@ -1,25 +1,62 @@
 <% provide(:title, @user.name) %>
 
-<h2>
-  Current time:
-  <%= Time.now %>
-</h2>
-
-<%= render @user %>
-
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path, class: "mb-5" %>
-
-  <h2 class="nt-bold mt-4">Posts (<%= @user.microposts.length %>)</h2>
-  <% if @user.microposts.any? %>
-    <% @user.microposts.each do |micropost| %>
-      <div class="text-sm">
-        <%= micropost.context %>
-      </div>
-    <% end %>
-  <% else %>
-    <p class="text-neutral-500">No posts found.</p>
+<div class="space-y-6">
+  <%= link_to users_path, class: "inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-neutral-50 text-neutral-700 font-medium rounded-lg border border-neutral-300 shadow-sm transition-colors duration-200" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    </svg>
+    Back to Users
   <% end %>
 
+  <%= render @user %>
+
+  <%# Action Buttons %>
+  <div class="flex flex-wrap items-center gap-3">
+    <%= link_to edit_user_path(@user), class: "inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition-colors duration-200" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+      Edit User
+    <% end %>
+
+
+    <% if current_user&.admin? && !current_user?(@user) %>
+      <%= button_to @user, method: :delete, data: { turbo_confirm: "Are you sure you want to delete #{@user.name}?"}, class: "inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-sm transition-colors duration-200" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+        Delete User
+      <% end %>
+    <% end %>
+  </div>
+
+  <%# Posts Section %>
+  <div class="border-t border-neutral-200 pt-6 mt-6">
+    <h2 class="text-lg font-semibold text-neutral-800 mb-4 flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      Posts
+      <span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-neutral-100 text-neutral-600">
+        <%= @user.microposts.length %>
+      </span>
+    </h2>
+
+    <% if @user.microposts.any? %>
+      <div class="space-y-3">
+        <% @user.microposts.each do |micropost| %>
+          <div class="p-4 bg-white rounded-lg border border-neutral-200 shadow-sm">
+            <p class="text-neutral-700"><%= micropost.context %></p>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="p-6 text-center bg-neutral-50 rounded-lg border border-dashed border-neutral-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-neutral-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <p class="text-neutral-500">No posts yet.</p>
+      </div>
+    <% end %>
+  </div>
 </div>

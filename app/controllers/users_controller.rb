@@ -1,13 +1,12 @@
-# typed: true
-
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :logged_in_user, only: [ :edit, :update ]
+  before_action :logged_in_user, only: [ :index, :edit, :update, :destroy ]
   before_action :correct_user, only: [ :edit, :update ]
+  before_action :admin_user, only: [ :destroy ]
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page])
   end
 
   # GET /users/1 or /users/1.json
@@ -80,6 +79,10 @@ class UsersController < ApplicationController
         flash[:danger] = "Please log in."
         redirect_to login_url
       end
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 
     def correct_user
