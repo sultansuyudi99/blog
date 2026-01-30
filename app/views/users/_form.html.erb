@@ -1,35 +1,25 @@
-<%= form_with(model: user, class: "w-full max-w-md mx-auto") do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul class="list-disc ml-6">
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with(model: user, class: "w-full max-w-md mx-auto") do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
 
   <div class="my-5">
-    <%= form.label :name, class: "block font-medium mb-1" %>
-    <%= form.text_field :name, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
+    <%= f.label :name, class: "block font-medium mb-1" %>
+    <%= f.text_field :name, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :email, class: "block font-medium mb-1" %>
-    <%= form.text_field :email, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
+    <%= f.label :email, class: "block font-medium mb-1" %>
+    <%= f.text_field :email, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :password, class: "block font-medium mb-1" %>
-    <%= form.password_field :password, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
+    <%= f.label :password, class: "block font-medium mb-1" %>
+    <%= f.password_field :password, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :password_confirmation, class: "block font-medium mb-1" %>
-    <%= form.password_field :password_confirmation, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
+    <%= f.label :password_confirmation, class: "block font-medium mb-1" %>
+    <%= f.password_field :password_confirmation, class: "block shadow rounded-md outline-none px-3 py-2 mt-2 w-full focus:ring-blue-500" %>
   </div>
 
-  <%= form.submit "Sign up", class: "bg-blue-500 rounded-lg text-white w-full py-3 px-5 inline-block font-medium cursor-pointer transition duration-200" %>
+  <%= f.submit "Sign up", class: "bg-blue-500 rounded-lg text-white w-full py-3 px-5 inline-block font-medium cursor-pointer transition duration-200" %>
 <% end %>

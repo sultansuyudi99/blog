@@ -11,6 +11,12 @@ class Micropost
   extend CommonRelationMethods
   extend GeneratedRelationMethods
 
+  sig { returns(ActiveStorage::Attached::One) }
+  def image; end
+
+  sig { params(attachable: T.untyped).returns(T.untyped) }
+  def image=(attachable); end
+
   private
 
   sig { returns(NilClass) }
@@ -411,8 +417,26 @@ class Micropost
   end
 
   module GeneratedAssociationMethods
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Attachment) }
+    def build_image_attachment(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Blob) }
+    def build_image_blob(*args, &blk); end
+
     sig { params(args: T.untyped, blk: T.untyped).returns(::User) }
     def build_user(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Attachment) }
+    def create_image_attachment(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Attachment) }
+    def create_image_attachment!(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Blob) }
+    def create_image_blob(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Blob) }
+    def create_image_blob!(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(::User) }
     def create_user(*args, &blk); end
@@ -420,8 +444,32 @@ class Micropost
     sig { params(args: T.untyped, blk: T.untyped).returns(::User) }
     def create_user!(*args, &blk); end
 
+    sig { returns(T.nilable(::ActiveStorage::Attachment)) }
+    def image_attachment; end
+
+    sig { params(value: T.nilable(::ActiveStorage::Attachment)).void }
+    def image_attachment=(value); end
+
+    sig { returns(T.nilable(::ActiveStorage::Blob)) }
+    def image_blob; end
+
+    sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
+    def image_blob=(value); end
+
+    sig { returns(T.nilable(::ActiveStorage::Attachment)) }
+    def reload_image_attachment; end
+
+    sig { returns(T.nilable(::ActiveStorage::Blob)) }
+    def reload_image_blob; end
+
     sig { returns(T.nilable(::User)) }
     def reload_user; end
+
+    sig { void }
+    def reset_image_attachment; end
+
+    sig { void }
+    def reset_image_blob; end
 
     sig { void }
     def reset_user; end
@@ -578,6 +626,9 @@ class Micropost
     def with(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def with_attached_image(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def with_recursive(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -586,49 +637,49 @@ class Micropost
 
   module GeneratedAttributeMethods
     sig { returns(T.nilable(::String)) }
-    def context; end
+    def content; end
 
     sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
-    def context=(value); end
+    def content=(value); end
 
     sig { returns(T::Boolean) }
-    def context?; end
+    def content?; end
 
     sig { returns(T.nilable(::String)) }
-    def context_before_last_save; end
+    def content_before_last_save; end
 
     sig { returns(T.untyped) }
-    def context_before_type_cast; end
+    def content_before_type_cast; end
 
     sig { returns(T::Boolean) }
-    def context_came_from_user?; end
+    def content_came_from_user?; end
 
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def context_change; end
+    def content_change; end
 
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def context_change_to_be_saved; end
+    def content_change_to_be_saved; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def context_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+    def content_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
-    def context_in_database; end
+    def content_in_database; end
 
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def context_previous_change; end
+    def content_previous_change; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def context_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+    def content_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
-    def context_previously_was; end
+    def content_previously_was; end
 
     sig { returns(T.nilable(::String)) }
-    def context_was; end
+    def content_was; end
 
     sig { void }
-    def context_will_change!; end
+    def content_will_change!; end
 
     sig { returns(::ActiveSupport::TimeWithZone) }
     def created_at; end
@@ -766,7 +817,7 @@ class Micropost
     def id_will_change!; end
 
     sig { void }
-    def restore_context!; end
+    def restore_content!; end
 
     sig { void }
     def restore_created_at!; end
@@ -784,10 +835,10 @@ class Micropost
     def restore_user_id!; end
 
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def saved_change_to_context; end
+    def saved_change_to_content; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def saved_change_to_context?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+    def saved_change_to_content?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
     def saved_change_to_created_at; end
@@ -910,7 +961,7 @@ class Micropost
     def user_id_will_change!; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def will_save_change_to_context?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+    def will_save_change_to_content?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_created_at?(from: T.unsafe(nil), to: T.unsafe(nil)); end
@@ -1065,6 +1116,9 @@ class Micropost
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def with(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def with_attached_image(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def with_recursive(*args, &blk); end

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   post "logout" => "sessions#destroy"
-  resources :microposts
+  resources :microposts, only: [ :create, :destroy ]
   resources :users
   resources :account_activations, only: [ :edit ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  def feed
+    microposts
+  end
+
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))

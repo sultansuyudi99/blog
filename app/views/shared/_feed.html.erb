@@ -1,0 +1,37 @@
+<% if @feed_items&.any? %>
+  <div class="feed-container">
+    <%# Feed Stats %>
+    <div class="flex items-center justify-between mb-4 px-1">
+      <h4 class="text-sm font-medium text-neutral-600">
+        <%= pluralize(@feed_items.total_entries, "post") %> in your feed
+      </h4>
+    </div>
+    
+    <%# Microposts List %>
+    <ol class="space-y-4">
+      <%= render @feed_items %>
+    </ol>
+    
+    <%# Pagination %>
+    <div class="mt-6 flex justify-center">
+      <%= will_paginate @feed_items, 
+          class: "pagination flex items-center gap-2",
+          previous_label: "← Previous",
+          next_label: "Next →" %>
+    </div>
+  </div>
+<% else %>
+  <%# Empty State %>
+  <div class="bg-white rounded-xl shadow-sm border border-neutral-200 p-8 text-center">
+    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    </div>
+    <h3 class="text-lg font-semibold text-neutral-800 mb-2">Your feed is empty</h3>
+    <p class="text-neutral-500 mb-4 max-w-sm mx-auto">
+      Start following users or create your first micropost to see content here!
+    </p>
+    <%= link_to "Explore Users", users_path, class: "inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition-colors duration-200" %>
+  </div>
+<% end %>

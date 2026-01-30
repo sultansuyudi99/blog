@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   # GET /users/new
@@ -72,14 +73,6 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.expect(user: [ :name, :email, :password, :password_confirmation ])
-    end
-
-    def logged_in_user
-      unless is_logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to(login_url)
-      end
     end
 
     def admin_user

@@ -16,9 +16,6 @@ module GeneratedPathHelpersModule
   def edit_account_activation_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def edit_micropost_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def edit_user_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -35,9 +32,6 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def microposts_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def new_micropost_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_path(*args); end
